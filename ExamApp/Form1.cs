@@ -41,6 +41,9 @@ namespace ExamApp
                                 SuccsesfullLogin.firstName = reader["first_name"].ToString();
                                 SuccsesfullLogin.lastName = reader["last_name"].ToString();
                                 MessageBox.Show($"{firstName} {lastName}, baþarýyla giriþ yaptýnýz.");
+                                Dashboard dashboard = new Dashboard();
+                                dashboard.Show();
+                                this.Hide();
                             }
                             else
                             {
