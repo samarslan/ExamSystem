@@ -57,10 +57,10 @@ namespace ExamApp
 
         private void button2_Click(object sender, EventArgs e)
         {
-            // Check if an exam is selected in the ListBox
+            // ListBox'ta seçili bir sınavın olup olmadığını kontrol edin
             if (listBox1.SelectedItem != null)
             {
-                // Get the selected exam ID and name from the ListBox
+                // ListBox'tan seçili sınavın ID'sini ve adını alın
                 string selectedExam = listBox1.SelectedItem.ToString();
                 int examId = Convert.ToInt32(selectedExam.Split(':')[0]);
 
@@ -68,13 +68,12 @@ namespace ExamApp
                 {
                     connection.Open();
 
-                    // Query to fetch the exam details and teacher name for the logged-in user
+                    // Giriş yapmış kullanıcı için sınav ayrıntılarını ve öğretmen adını almak için sorgu
                     string query = @"SELECT exams.id, exams.teacher_id, exams.exam_name, exam_results.score, users.first_name, users.last_name
                              FROM exams
                              LEFT JOIN exam_results ON exams.id = exam_results.exam_id
                              LEFT JOIN users ON exams.teacher_id = users.id
                              WHERE exams.id = @examId AND exam_results.student_id = @userId";
-
 
                     using (SqlCommand command = new SqlCommand(query, connection))
                     {
@@ -94,18 +93,18 @@ namespace ExamApp
                             string message;
                             if (score.HasValue)
                             {
-                                message = $"Exam ID: {examIdResult}\nExam Name: {examName}\nTeacher: {teacherFirstName} {teacherLastName}\nScore: {score}";
+                                message = $"Sınav ID: {examIdResult}\nSınav Adı: {examName}\nÖğretmen: {teacherFirstName} {teacherLastName}\nPuan: {score}";
                             }
                             else
                             {
-                                message = $"Exam ID: {examIdResult}\nExam Name: {examName}\nTeacher: {teacherFirstName} {teacherLastName}\nScore: You haven't solved this exam.";
+                                message = $"Sınav ID: {examIdResult}\nSınav Adı: {examName}\nÖğretmen: {teacherFirstName} {teacherLastName}\nPuan: Bu sınavı çözmüş değilsiniz.";
                             }
 
                             MessageBox.Show(message);
                         }
                         else
                         {
-                            MessageBox.Show("Exam details not found for the logged-in user.");
+                            MessageBox.Show("Giriş yapmış kullanıcı için sınav ayrıntıları bulunamadı.");
                         }
 
                         reader.Close();
@@ -114,7 +113,7 @@ namespace ExamApp
             }
             else
             {
-                MessageBox.Show("No exam selected.");
+                MessageBox.Show("Hiçbir sınav seçilmedi.");
             }
         }
     }
