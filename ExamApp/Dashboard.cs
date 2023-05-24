@@ -116,5 +116,57 @@ namespace ExamApp
                 MessageBox.Show("Hiçbir sınav seçilmedi.");
             }
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            // Check if an exam is selected in the ListBox
+            if (listBox1.SelectedItem != null)
+            {
+                // Get the selected exam ID and name from the ListBox
+                string selectedExam = listBox1.SelectedItem.ToString();
+                int examId = Convert.ToInt32(selectedExam.Split(':')[0]);
+
+                using (SqlConnection connection = new SqlConnection(connectionString))
+                {
+                    connection.Open();
+
+                    // Query to check if the student's exam result is null for the selected exam
+                    string query = @"SELECT score
+                             FROM exam_results
+                             WHERE exam_id = @examId AND student_id = @userId";
+
+                    using (SqlCommand command = new SqlCommand(query, connection))
+                    {
+                        command.Parameters.AddWithValue("@examId", examId);
+                        command.Parameters.AddWithValue("@userId", SuccsesfullLogin.id);
+
+                        object result = command.ExecuteScalar();
+
+                        // Check if the student's exam result is null
+                        if (result == DBNull.Value)
+                        {
+                            // Set the selected exam ID in SuccsesfullLogin.cs
+                            SuccsesfullLogin.selectedExam = examId;
+
+                            // Hide this form
+                            this.Hide();
+
+                            // Open the ExamPanel form
+                            ExamPanel examPanelForm = new ExamPanel();
+                            examPanelForm.Show();
+                        }
+                        else
+                        {
+                            MessageBox.Show("Bu sınav için daha önce bir sonuç gönderdiniz.");
+                        }
+                    }
+                }
+            }
+            else
+            {
+                MessageBox.Show("Herhangi bir sınav seçilmedi.");
+            }
+        }
+
     }
 }
