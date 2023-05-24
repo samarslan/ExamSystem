@@ -5,7 +5,6 @@ namespace ExamApp
     public partial class Form1 : Form
     {
         string connectionString = "Data Source=localhost;Initial Catalog=ExamSystem;Integrated Security=True";
-
         public Form1()
         {
             InitializeComponent();
@@ -22,7 +21,7 @@ namespace ExamApp
                 {
                     connection.Open();
 
-                    string query = "SELECT first_name, last_name, user_type FROM users WHERE username = @username AND password = @password";
+                    string query = "SELECT id, first_name, last_name, user_type FROM users WHERE username = @username AND password = @password";
                     using (SqlCommand command = new SqlCommand(query, connection))
                     {
                         command.Parameters.AddWithValue("@username", username);
@@ -36,6 +35,11 @@ namespace ExamApp
                             {
                                 string firstName = reader["first_name"].ToString();
                                 string lastName = reader["last_name"].ToString();
+                                SuccsesfullLogin.id = Convert.ToInt32(reader["id"].ToString());
+                                SuccsesfullLogin.username = username;
+                                SuccsesfullLogin.password = password;
+                                SuccsesfullLogin.firstName = reader["first_name"].ToString();
+                                SuccsesfullLogin.lastName = reader["last_name"].ToString();
                                 MessageBox.Show($"{firstName} {lastName}, baþarýyla giriþ yaptýnýz.");
                             }
                             else
