@@ -43,6 +43,7 @@
             textBox1.Name = "textBox1";
             textBox1.Size = new Size(212, 26);
             textBox1.TabIndex = 0;
+            textBox1.Text = "alexGreen";
             // 
             // textBox2
             // 
@@ -50,6 +51,7 @@
             textBox2.Name = "textBox2";
             textBox2.Size = new Size(212, 26);
             textBox2.TabIndex = 1;
+            textBox2.Text = "password3";
             // 
             // label1
             // 
