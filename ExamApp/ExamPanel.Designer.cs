@@ -28,33 +28,21 @@
         /// </summary>
         private void InitializeComponent()
         {
-            comboBox1 = new ComboBox();
             label1 = new Label();
-            label2 = new Label();
-            richTextBox1 = new RichTextBox();
+            questionRichTextBox = new RichTextBox();
             label3 = new Label();
-            richTextBox2 = new RichTextBox();
-            richTextBox3 = new RichTextBox();
-            richTextBox4 = new RichTextBox();
-            richTextBox5 = new RichTextBox();
-            label4 = new Label();
-            label5 = new Label();
-            label6 = new Label();
-            label7 = new Label();
+            option1RichTextBox = new RichTextBox();
+            option2RichTextBox = new RichTextBox();
+            option3RichTextBox = new RichTextBox();
+            option4RichTextBox = new RichTextBox();
             btnNextQuestion = new Button();
             btnEndExam = new Button();
             btnPreviousQuestion = new Button();
+            option1RadioBtn = new RadioButton();
+            option2RadioBtn = new RadioButton();
+            option3RadioBtn = new RadioButton();
+            option4RadioBtn = new RadioButton();
             SuspendLayout();
-            // 
-            // comboBox1
-            // 
-            comboBox1.Enabled = false;
-            comboBox1.FormattingEnabled = true;
-            comboBox1.Location = new Point(12, 242);
-            comboBox1.Name = "comboBox1";
-            comboBox1.Size = new Size(45, 27);
-            comboBox1.TabIndex = 0;
-            comboBox1.SelectedIndexChanged += comboBox1_SelectedIndexChanged;
             // 
             // label1
             // 
@@ -65,23 +53,14 @@
             label1.TabIndex = 1;
             label1.Text = "label1";
             // 
-            // label2
+            // questionRichTextBox
             // 
-            label2.AutoSize = true;
-            label2.Location = new Point(12, 220);
-            label2.Name = "label2";
-            label2.Size = new Size(40, 19);
-            label2.TabIndex = 2;
-            label2.Text = "Soru:";
-            // 
-            // richTextBox1
-            // 
-            richTextBox1.Enabled = false;
-            richTextBox1.Location = new Point(194, 12);
-            richTextBox1.Name = "richTextBox1";
-            richTextBox1.Size = new Size(497, 77);
-            richTextBox1.TabIndex = 3;
-            richTextBox1.Text = "";
+            questionRichTextBox.Enabled = false;
+            questionRichTextBox.Location = new Point(194, 12);
+            questionRichTextBox.Name = "questionRichTextBox";
+            questionRichTextBox.Size = new Size(497, 77);
+            questionRichTextBox.TabIndex = 3;
+            questionRichTextBox.Text = "";
             // 
             // label3
             // 
@@ -92,76 +71,41 @@
             label3.TabIndex = 4;
             label3.Text = "Soru:";
             // 
-            // richTextBox2
+            // option1RichTextBox
             // 
-            richTextBox2.Enabled = false;
-            richTextBox2.Location = new Point(194, 137);
-            richTextBox2.Name = "richTextBox2";
-            richTextBox2.Size = new Size(497, 77);
-            richTextBox2.TabIndex = 5;
-            richTextBox2.Text = "";
+            option1RichTextBox.Enabled = false;
+            option1RichTextBox.Location = new Point(194, 137);
+            option1RichTextBox.Name = "option1RichTextBox";
+            option1RichTextBox.Size = new Size(497, 77);
+            option1RichTextBox.TabIndex = 5;
+            option1RichTextBox.Text = "";
             // 
-            // richTextBox3
+            // option2RichTextBox
             // 
-            richTextBox3.Enabled = false;
-            richTextBox3.Location = new Point(194, 220);
-            richTextBox3.Name = "richTextBox3";
-            richTextBox3.Size = new Size(497, 77);
-            richTextBox3.TabIndex = 6;
-            richTextBox3.Text = "";
+            option2RichTextBox.Enabled = false;
+            option2RichTextBox.Location = new Point(194, 220);
+            option2RichTextBox.Name = "option2RichTextBox";
+            option2RichTextBox.Size = new Size(497, 77);
+            option2RichTextBox.TabIndex = 6;
+            option2RichTextBox.Text = "";
             // 
-            // richTextBox4
+            // option3RichTextBox
             // 
-            richTextBox4.Enabled = false;
-            richTextBox4.Location = new Point(194, 303);
-            richTextBox4.Name = "richTextBox4";
-            richTextBox4.Size = new Size(497, 77);
-            richTextBox4.TabIndex = 7;
-            richTextBox4.Text = "";
+            option3RichTextBox.Enabled = false;
+            option3RichTextBox.Location = new Point(194, 303);
+            option3RichTextBox.Name = "option3RichTextBox";
+            option3RichTextBox.Size = new Size(497, 77);
+            option3RichTextBox.TabIndex = 7;
+            option3RichTextBox.Text = "";
             // 
-            // richTextBox5
+            // option4RichTextBox
             // 
-            richTextBox5.Location = new Point(194, 386);
-            richTextBox5.Name = "richTextBox5";
-            richTextBox5.Size = new Size(497, 77);
-            richTextBox5.TabIndex = 8;
-            richTextBox5.Text = "";
-            // 
-            // label4
-            // 
-            label4.AutoSize = true;
-            label4.Location = new Point(143, 168);
-            label4.Name = "label4";
-            label4.Size = new Size(22, 19);
-            label4.TabIndex = 9;
-            label4.Text = "A)";
-            // 
-            // label5
-            // 
-            label5.AutoSize = true;
-            label5.Location = new Point(143, 250);
-            label5.Name = "label5";
-            label5.Size = new Size(21, 19);
-            label5.TabIndex = 10;
-            label5.Text = "B)";
-            // 
-            // label6
-            // 
-            label6.AutoSize = true;
-            label6.Location = new Point(143, 334);
-            label6.Name = "label6";
-            label6.Size = new Size(22, 19);
-            label6.TabIndex = 11;
-            label6.Text = "C)";
-            // 
-            // label7
-            // 
-            label7.AutoSize = true;
-            label7.Location = new Point(143, 416);
-            label7.Name = "label7";
-            label7.Size = new Size(23, 19);
-            label7.TabIndex = 12;
-            label7.Text = "D)";
+            option4RichTextBox.Enabled = false;
+            option4RichTextBox.Location = new Point(194, 386);
+            option4RichTextBox.Name = "option4RichTextBox";
+            option4RichTextBox.Size = new Size(497, 77);
+            option4RichTextBox.TabIndex = 8;
+            option4RichTextBox.Text = "";
             // 
             // btnNextQuestion
             // 
@@ -193,27 +137,69 @@
             btnPreviousQuestion.UseVisualStyleBackColor = true;
             btnPreviousQuestion.Click += btnPreviousQuestion_Click;
             // 
+            // option1RadioBtn
+            // 
+            option1RadioBtn.AutoSize = true;
+            option1RadioBtn.Location = new Point(148, 164);
+            option1RadioBtn.Name = "option1RadioBtn";
+            option1RadioBtn.Size = new Size(40, 23);
+            option1RadioBtn.TabIndex = 16;
+            option1RadioBtn.TabStop = true;
+            option1RadioBtn.Text = "A)";
+            option1RadioBtn.UseVisualStyleBackColor = true;
+            // 
+            // option2RadioBtn
+            // 
+            option2RadioBtn.AutoSize = true;
+            option2RadioBtn.Location = new Point(149, 251);
+            option2RadioBtn.Name = "option2RadioBtn";
+            option2RadioBtn.Size = new Size(39, 23);
+            option2RadioBtn.TabIndex = 17;
+            option2RadioBtn.TabStop = true;
+            option2RadioBtn.Text = "B)";
+            option2RadioBtn.UseVisualStyleBackColor = true;
+            // 
+            // option3RadioBtn
+            // 
+            option3RadioBtn.AutoSize = true;
+            option3RadioBtn.Location = new Point(148, 330);
+            option3RadioBtn.Name = "option3RadioBtn";
+            option3RadioBtn.Size = new Size(40, 23);
+            option3RadioBtn.TabIndex = 18;
+            option3RadioBtn.TabStop = true;
+            option3RadioBtn.Text = "C)";
+            option3RadioBtn.UseVisualStyleBackColor = true;
+            // 
+            // option4RadioBtn
+            // 
+            option4RadioBtn.AutoSize = true;
+            option4RadioBtn.Location = new Point(149, 411);
+            option4RadioBtn.Name = "option4RadioBtn";
+            option4RadioBtn.Size = new Size(41, 23);
+            option4RadioBtn.TabIndex = 19;
+            option4RadioBtn.TabStop = true;
+            option4RadioBtn.Text = "D)";
+            option4RadioBtn.UseVisualStyleBackColor = true;
+            // 
             // ExamPanel
             // 
             AutoScaleDimensions = new SizeF(8F, 19F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(702, 549);
+            Controls.Add(option4RadioBtn);
+            Controls.Add(option3RadioBtn);
+            Controls.Add(option2RadioBtn);
+            Controls.Add(option1RadioBtn);
             Controls.Add(btnPreviousQuestion);
             Controls.Add(btnEndExam);
             Controls.Add(btnNextQuestion);
-            Controls.Add(label7);
-            Controls.Add(label6);
-            Controls.Add(label5);
-            Controls.Add(label4);
-            Controls.Add(richTextBox5);
-            Controls.Add(richTextBox4);
-            Controls.Add(richTextBox3);
-            Controls.Add(richTextBox2);
+            Controls.Add(option4RichTextBox);
+            Controls.Add(option3RichTextBox);
+            Controls.Add(option2RichTextBox);
+            Controls.Add(option1RichTextBox);
             Controls.Add(label3);
-            Controls.Add(richTextBox1);
-            Controls.Add(label2);
+            Controls.Add(questionRichTextBox);
             Controls.Add(label1);
-            Controls.Add(comboBox1);
             Name = "ExamPanel";
             Text = "ExamPanel";
             Load += ExamPanel_Load;
@@ -222,22 +208,19 @@
         }
 
         #endregion
-
-        private ComboBox comboBox1;
         private Label label1;
-        private Label label2;
-        private RichTextBox richTextBox1;
+        private RichTextBox questionRichTextBox;
         private Label label3;
-        private RichTextBox richTextBox2;
-        private RichTextBox richTextBox3;
-        private RichTextBox richTextBox4;
-        private RichTextBox richTextBox5;
-        private Label label4;
-        private Label label5;
-        private Label label6;
-        private Label label7;
+        private RichTextBox option1RichTextBox;
+        private RichTextBox option2RichTextBox;
+        private RichTextBox option3RichTextBox;
+        private RichTextBox option4RichTextBox;
         private Button btnNextQuestion;
         private Button btnEndExam;
         private Button btnPreviousQuestion;
+        private RadioButton option1RadioBtn;
+        private RadioButton option2RadioBtn;
+        private RadioButton option3RadioBtn;
+        private RadioButton option4RadioBtn;
     }
 }
