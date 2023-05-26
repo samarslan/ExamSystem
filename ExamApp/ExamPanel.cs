@@ -58,6 +58,7 @@ namespace ExamApp
             }
             PopulateQuestion(questionCounter);
             givenAnswers = new string[Exam.questions.Count];
+            label1.Text = $"{Exam.exam_name}";
         }
 
         private List<Question> LoadQuestions(string questionIds)
