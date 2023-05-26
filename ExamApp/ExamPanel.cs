@@ -15,6 +15,8 @@ namespace ExamApp
     {
         int selectedExamId = SuccsesfullLogin.selectedExam;
         string connectionString = "Data Source=localhost;Initial Catalog=ExamSystem;Integrated Security=True";
+        string[] givenAnswers;
+        int questionCounter = 0;
         public ExamPanel()
         {
             InitializeComponent();
@@ -54,6 +56,8 @@ namespace ExamApp
                     }
                 }
             }
+            PopulateQuestion(questionCounter);
+            givenAnswers = new string[Exam.questions.Count];
         }
 
         private List<Question> LoadQuestions(string questionIds)
@@ -102,19 +106,116 @@ namespace ExamApp
             return questions;
         }
 
+        private void PopulateQuestion(int qID)
+        {
+            Question question = Exam.questions[qID];
+            questionRichTextBox.Text = question.question_text;
+            option1RichTextBox.Text = question.option1;
+            option2RichTextBox.Text = question.option2;
+            option3RichTextBox.Text = question.option3;
+            option4RichTextBox.Text = question.option4;
+        }
+
         private void btnPreviousQuestion_Click(object sender, EventArgs e)
         {
-
+            questionCounter--;
+            option1RadioBtn.Checked = false;
+            option2RadioBtn.Checked = false;
+            option3RadioBtn.Checked = false;
+            option4RadioBtn.Checked = false;
+            PopulateQuestion(questionCounter);
+            btnNextQuestion.Enabled = true;
+            if(questionCounter == 0)
+            {
+                btnPreviousQuestion.Enabled = false;
+            }
         }
 
         private void btnNextQuestion_Click(object sender, EventArgs e)
         {
-
+            questionCounter++;
+            option1RadioBtn.Checked = false;
+            option2RadioBtn.Checked = false;
+            option3RadioBtn.Checked = false;
+            option4RadioBtn.Checked = false;
+            PopulateQuestion(questionCounter);
+            if (questionCounter == Exam.questions.Count - 1)
+            {
+                btnNextQuestion.Enabled = false;
+            }
         }
 
         private void btnEndExam_Click(object sender, EventArgs e)
         {
+            int correctAnswers = 0;
+            int wrongAnswers = 0;
+            int score = 0;
+            for (int i = 0; i < givenAnswers.Length; i++)
+            {
+                if (givenAnswers[i] == Exam.questions[i].correct_answer)
+                {
+                    correctAnswers++;
+                }
+                else
+                {
+                    wrongAnswers++;
+                }
+            }
+            score = correctAnswers * 100 / Exam.questions.Count;
+            MessageBox.Show($"Doğru Cevap: {correctAnswers}\nYanlış Cevap: {wrongAnswers}\nPuanınız: {score}");
 
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                connection.Open();
+
+                string query = @"UPDATE exam_results
+                         SET score = @score
+                         WHERE exam_id = @examId
+                         AND student_id = @studentId";
+                using (SqlCommand command = new SqlCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@score", score);
+                    command.Parameters.AddWithValue("@examId", Exam.id);
+                    command.Parameters.AddWithValue("@studentId", SuccsesfullLogin.id);
+
+                    command.ExecuteNonQuery();
+                }
+            }
+            this.Hide();
+            Dashboard dashboardForm = new Dashboard();
+            dashboardForm.Show();
+        }
+
+        private void option1RadioBtn_CheckedChanged(object sender, EventArgs e)
+        {
+            if (option1RadioBtn.Checked)
+            {
+                givenAnswers[questionCounter] = option1RichTextBox.Text;
+            }
+        }
+
+        private void option2RadioBtn_CheckedChanged(object sender, EventArgs e)
+        {
+            if (option2RadioBtn.Checked)
+            {
+                givenAnswers[questionCounter] = option2RichTextBox.Text;
+            }
+        }
+
+        private void option3RadioBtn_CheckedChanged(object sender, EventArgs e)
+        {
+            if (option3RadioBtn.Checked)
+            {
+                givenAnswers[questionCounter] = option3RichTextBox.Text;
+            }
+        }
+
+        private void option4RadioBtn_CheckedChanged(object sender, EventArgs e)
+        {
+            if (option4RadioBtn.Checked)
+            {
+                givenAnswers[questionCounter] = option4RichTextBox.Text;
+            }
         }
     }
 }

@@ -147,6 +147,7 @@
             option1RadioBtn.TabStop = true;
             option1RadioBtn.Text = "A)";
             option1RadioBtn.UseVisualStyleBackColor = true;
+            option1RadioBtn.CheckedChanged += option1RadioBtn_CheckedChanged;
             // 
             // option2RadioBtn
             // 
@@ -158,6 +159,7 @@
             option2RadioBtn.TabStop = true;
             option2RadioBtn.Text = "B)";
             option2RadioBtn.UseVisualStyleBackColor = true;
+            option2RadioBtn.CheckedChanged += option2RadioBtn_CheckedChanged;
             // 
             // option3RadioBtn
             // 
@@ -169,6 +171,7 @@
             option3RadioBtn.TabStop = true;
             option3RadioBtn.Text = "C)";
             option3RadioBtn.UseVisualStyleBackColor = true;
+            option3RadioBtn.CheckedChanged += option3RadioBtn_CheckedChanged;
             // 
             // option4RadioBtn
             // 
@@ -180,6 +183,7 @@
             option4RadioBtn.TabStop = true;
             option4RadioBtn.Text = "D)";
             option4RadioBtn.UseVisualStyleBackColor = true;
+            option4RadioBtn.CheckedChanged += option4RadioBtn_CheckedChanged;
             // 
             // ExamPanel
             // 

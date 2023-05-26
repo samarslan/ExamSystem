@@ -86,12 +86,18 @@ namespace ExamApp
                             int examIdResult = Convert.ToInt32(reader["id"]);
                             int teacherId = Convert.ToInt32(reader["teacher_id"]);
                             string examName = reader["exam_name"].ToString();
-                            float? score = reader["score"] as float?;
+                            float? score=0;
+                            Boolean hasValue = false;
+                            if (!reader.IsDBNull(reader.GetOrdinal("score")))
+                            {
+                                score = (float)reader.GetDouble(reader.GetOrdinal("score"));
+                                hasValue =true;
+                            }
                             string teacherFirstName = reader["first_name"].ToString();
                             string teacherLastName = reader["last_name"].ToString();
 
                             string message;
-                            if (score.HasValue)
+                            if (hasValue)
                             {
                                 message = $"Sınav ID: {examIdResult}\nSınav Adı: {examName}\nÖğretmen: {teacherFirstName} {teacherLastName}\nPuan: {score}";
                             }
