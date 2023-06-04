@@ -86,6 +86,40 @@ namespace TeacherApp
 
         private void examInfoBtn_Click(object sender, EventArgs e)
         {
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(connectionString))
+                {
+                    connection.Open();
+                    string query = "Select id, exam_name, teacher_id, eligible_student_ids, question_ids from exams Where id=@examid";
+
+                    using (SqlCommand command = new SqlCommand(query, connection))
+                    {
+                        command.Parameters.AddWithValue("@examid", int.Parse(examsListBox.SelectedItem.ToString().Split(':')[0]));
+                        SqlDataReader reader = command.ExecuteReader();
+                        while (reader.Read())
+                        {
+                            SelectedExam.id = (int)reader["id"];
+                            SelectedExam.exam_name = reader["exam_name"].ToString();
+                            SelectedExam.teacher_id = (int)reader["teacher_id"];
+                            SelectedExam.eligible_students = reader["eligible_student_ids"].ToString();
+                            SelectedExam.questions = reader["question_ids"].ToString();
+                            SelectedExam.number_of_questions = SelectedExam.questions.Split(',').Length;
+                            SelectedExam.number_of_students = SelectedExam.eligible_students.Split(',').Length;
+                        }
+                        reader.Close();
+                    }
+
+                }
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Veritabanına bağlanırken bir hata oluştu: " + ex.Message);
+            }
+
+            string message = $"Sınav id: {SelectedExam.id}\nSınav adı: {SelectedExam.exam_name}\nSoru sayısı: {SelectedExam.number_of_questions}\nSoru idleri: {SelectedExam.questions}\nÖğrenci sayısı: {SelectedExam.number_of_students}\nÖğrenci idleri: {SelectedExam.eligible_students}";
+            MessageBox.Show(message);
 
         }
 
@@ -104,6 +138,45 @@ namespace TeacherApp
             {
                 MessageBox.Show("Lütfen bir öğrenci seçiniz");
             }
-        }   
+        }
+
+        private void editExamBtn_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(connectionString))
+                {
+                    connection.Open();
+                    string query = "Select id, exam_name, teacher_id, eligible_student_ids, question_ids from exams Where id=@examid";
+
+                    using (SqlCommand command = new SqlCommand(query, connection))
+                    {
+                        command.Parameters.AddWithValue("@examid", int.Parse(examsListBox.SelectedItem.ToString().Split(':')[0]));
+                        SqlDataReader reader = command.ExecuteReader();
+                        while (reader.Read())
+                        {
+                            SelectedExam.id = (int)reader["id"];
+                            SelectedExam.exam_name = reader["exam_name"].ToString();
+                            SelectedExam.teacher_id = (int)reader["teacher_id"];
+                            SelectedExam.eligible_students = reader["eligible_student_ids"].ToString();
+                            SelectedExam.questions = reader["question_ids"].ToString();
+                            SelectedExam.number_of_questions = SelectedExam.questions.Split(',').Length;
+                            SelectedExam.number_of_students = SelectedExam.eligible_students.Split(',').Length;
+                        }
+                        reader.Close();
+                    }
+
+                }
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Veritabanına bağlanırken bir hata oluştu: " + ex.Message);
+            }
+            this.Hide();
+
+            EditExam editExam = new EditExam();
+            editExam.Show();
+        }
     }
 }

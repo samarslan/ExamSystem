@@ -64,7 +64,7 @@
             examInfoBtn.Name = "examInfoBtn";
             examInfoBtn.Size = new Size(144, 89);
             examInfoBtn.TabIndex = 1;
-            examInfoBtn.Text = "button1";
+            examInfoBtn.Text = "Sınav Bilgisi";
             examInfoBtn.UseVisualStyleBackColor = true;
             examInfoBtn.Click += examInfoBtn_Click;
             // 
@@ -98,6 +98,7 @@
             editExamBtn.TabIndex = 3;
             editExamBtn.Text = "button1";
             editExamBtn.UseVisualStyleBackColor = true;
+            editExamBtn.Click += editExamBtn_Click;
             // 
             // studentsGroupBox
             // 
