@@ -96,7 +96,7 @@
             applChgnsBtn.Name = "applChgnsBtn";
             applChgnsBtn.Size = new Size(187, 90);
             applChgnsBtn.TabIndex = 7;
-            applChgnsBtn.Text = "button1";
+            applChgnsBtn.Text = "Kaydet";
             applChgnsBtn.UseVisualStyleBackColor = true;
             // 
             // crtQstnBtn
@@ -105,8 +105,9 @@
             crtQstnBtn.Name = "crtQstnBtn";
             crtQstnBtn.Size = new Size(187, 90);
             crtQstnBtn.TabIndex = 8;
-            crtQstnBtn.Text = "button2";
+            crtQstnBtn.Text = "Soru Oluştur";
             crtQstnBtn.UseVisualStyleBackColor = true;
+            crtQstnBtn.Click += crtQstnBtn_Click;
             // 
             // edtQstnBtn
             // 
@@ -114,7 +115,7 @@
             edtQstnBtn.Name = "edtQstnBtn";
             edtQstnBtn.Size = new Size(187, 90);
             edtQstnBtn.TabIndex = 9;
-            edtQstnBtn.Text = "button2";
+            edtQstnBtn.Text = "Soru Düzenle";
             edtQstnBtn.UseVisualStyleBackColor = true;
             edtQstnBtn.Click += edtQstnBtn_Click;
             // 
@@ -124,7 +125,7 @@
             qstnInfoBtn.Name = "qstnInfoBtn";
             qstnInfoBtn.Size = new Size(187, 90);
             qstnInfoBtn.TabIndex = 10;
-            qstnInfoBtn.Text = "button2";
+            qstnInfoBtn.Text = "Soru Bilgisi";
             qstnInfoBtn.UseVisualStyleBackColor = true;
             qstnInfoBtn.Click += qstnInfoBtn_Click;
             // 

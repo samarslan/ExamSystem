@@ -1,13 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Data.SqlClient;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
+﻿using System.Data.SqlClient;
 
 namespace TeacherApp
 {
@@ -23,7 +14,13 @@ namespace TeacherApp
         private void EditExam_Load(object sender, EventArgs e)
         {
             textBox1.Text = SelectedExam.exam_name;
+            PopulateStudents();
+            PopulateQuestions();
+        }
 
+        private void PopulateStudents()
+        {
+            studentsCheckedListBox.Items.Clear();
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
                 connection.Open();
@@ -50,8 +47,16 @@ namespace TeacherApp
                     }
                     studentsReader.Close();
                 }
+            }
+        }
 
+        public void PopulateQuestions()
+        {
+            questionsCheckedListBox.Items.Clear();
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
                 // Populate questionsCheckedListBox
+                connection.Open();
                 string questionsQuery = "SELECT id, question_text FROM questions";
                 using (SqlCommand questionsCommand = new SqlCommand(questionsQuery, connection))
                 {
@@ -73,8 +78,6 @@ namespace TeacherApp
                     questionsReader.Close();
                 }
             }
-
-
         }
 
         private void qstnInfoBtn_Click(object sender, EventArgs e)
@@ -85,7 +88,16 @@ namespace TeacherApp
 
         private void edtQstnBtn_Click(object sender, EventArgs e)
         {
+            QuestionEditDialog questionEditDialog = new QuestionEditDialog();
+            questionEditDialog.ShowDialog();
+            PopulateQuestions();
+        }
 
+        private void crtQstnBtn_Click(object sender, EventArgs e)
+        {
+            QuestionCreation questionCreation = new QuestionCreation();
+            questionCreation.ShowDialog();
+            PopulateQuestions();
         }
     }
 }
