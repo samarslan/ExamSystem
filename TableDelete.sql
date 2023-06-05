@@ -1,0 +1,4 @@
+﻿DROP TABLE IF EXISTS exam_results;
+DROP TABLE IF EXISTS exams;
+DROP TABLE IF EXISTS questions;
+DROP TABLE IF EXISTS users;

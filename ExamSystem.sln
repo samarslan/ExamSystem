@@ -8,9 +8,10 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Çözüm Öğeleri", "Çözüm Öğeleri", "{C792BBCF-9E92-48ED-A918-26E07DD93AF8}"
 	ProjectSection(SolutionItems) = preProject
 		DataBaseCreator.sql = DataBaseCreator.sql
+		TableDelete.sql = TableDelete.sql
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TeacherApp", "TeacherApp\TeacherApp.csproj", "{969E6497-1E64-458C-94EC-C9EA8399CB4E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TeacherApp", "TeacherApp\TeacherApp.csproj", "{969E6497-1E64-458C-94EC-C9EA8399CB4E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

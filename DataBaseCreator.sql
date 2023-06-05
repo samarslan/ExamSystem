@@ -1,5 +1,5 @@
 ﻿CREATE TABLE users (
-  id INT PRIMARY KEY,
+  id INT IDENTITY(1, 1) PRIMARY KEY,
   username VARCHAR(50) NOT NULL,
   password VARCHAR(255) NOT NULL,
   first_name VARCHAR(50) NOT NULL,
@@ -8,7 +8,7 @@
 );
 
 CREATE TABLE questions (
-  id INT PRIMARY KEY,
+  id INT IDENTITY(1, 1) PRIMARY KEY,
   question_text VARCHAR(MAX) NOT NULL,
   option1 VARCHAR(MAX) NOT NULL,
   option2 VARCHAR(MAX) NOT NULL,
@@ -17,9 +17,8 @@ CREATE TABLE questions (
   correct_answer VARCHAR(MAX) NOT NULL
 );
 
-
 CREATE TABLE exams (
-  id INT PRIMARY KEY,
+  id INT IDENTITY(1, 1) PRIMARY KEY,
   exam_name VARCHAR(50) NOT NULL,
   teacher_id INT NOT NULL,
   eligible_student_ids VARCHAR(MAX) NOT NULL,
@@ -28,7 +27,7 @@ CREATE TABLE exams (
 );
 
 CREATE TABLE exam_results (
-  id INT PRIMARY KEY,
+  id INT IDENTITY(1, 1) PRIMARY KEY,
   exam_id INT NOT NULL,
   student_id INT NOT NULL,
   score FLOAT,
@@ -37,29 +36,29 @@ CREATE TABLE exam_results (
 );
 
 -- Insert data into the users table
-INSERT INTO users (id, username, password, first_name, last_name, user_type)
+INSERT INTO users (username, password, first_name, last_name, user_type)
 VALUES
-  (1, 'johnDoe', 'password1', 'John', 'Doe', 1),
-  (2, 'janeSmith', 'password2', 'Jane', 'Smith', 0),
-  (3, 'alexGreen', 'password3', 'Alex', 'Green', 0),
-  (4, 'adminUser', 'password4', 'Admin', 'User', 2);
+  ('johnDoe', 'password1', 'John', 'Doe', 1),
+  ('janeSmith', 'password2', 'Jane', 'Smith', 0),
+  ('alexGreen', 'password3', 'Alex', 'Green', 0),
+  ('adminUser', 'password4', 'Admin', 'User', 2);
 
 -- Insert data into the questions table
-INSERT INTO questions (id, question_text, option1, option2, option3, option4, correct_answer)
+INSERT INTO questions (question_text, option1, option2, option3, option4, correct_answer)
 VALUES
-  (1, 'What is the capital of France?', 'Paris', 'London', 'Madrid', 'Rome', 'Paris'),
-  (2, 'What is the largest planet in our solar system?', 'Jupiter', 'Saturn', 'Mars', 'Neptune', 'Jupiter'),
-  (3, 'Who painted the Mona Lisa?', 'Leonardo da Vinci', 'Pablo Picasso', 'Vincent van Gogh', 'Michelangelo', 'Leonardo da Vinci');
+  ('What is the capital of France?', 'Paris', 'London', 'Madrid', 'Rome', 'Paris'),
+  ('What is the largest planet in our solar system?', 'Jupiter', 'Saturn', 'Mars', 'Neptune', 'Jupiter'),
+  ('Who painted the Mona Lisa?', 'Leonardo da Vinci', 'Pablo Picasso', 'Vincent van Gogh', 'Michelangelo', 'Leonardo da Vinci');
 
 -- Insert data into the exams table
-INSERT INTO exams (id, exam_name, teacher_id, eligible_student_ids, question_ids)
+INSERT INTO exams (exam_name, teacher_id, eligible_student_ids, question_ids)
 VALUES
-  (1,'Pop-Culture-1-Midterm', 1, '3', '1,2'),
-  (2, 'Pop-Culture-2-Midterm', 1, '2,3', '2,3');
+  ('Pop-Culture-1-Midterm', 1, '3', '1,2'),
+  ('Pop-Culture-2-Midterm', 1, '2,3', '2,3');
 
-  -- Insert data into the exam_results table
-INSERT INTO exam_results (id, exam_id, student_id)
+-- Insert data into the exam_results table
+INSERT INTO exam_results (exam_id, student_id)
 VALUES
-  (1, 1, 3),
-  (2, 1, 2),
-  (3, 2, 3);
+  (1, 3),
+  (2, 2),
+  (2, 3);
