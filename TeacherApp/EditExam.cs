@@ -99,5 +99,107 @@ namespace TeacherApp
             questionCreation.ShowDialog();
             PopulateQuestions();
         }
+
+        private void applChgnsBtn_Click(object sender, EventArgs e)
+        {
+            // Get the checked questions
+            List<int> checkedQuestions = new List<int>();
+            foreach (var item in questionsCheckedListBox.CheckedItems)
+            {
+                string questionInfo = item.ToString();
+                int questionId = int.Parse(questionInfo.Split(':')[0]);
+                checkedQuestions.Add(questionId);
+            }
+
+            // Create a string of checked question IDs separated by commas
+            string checkedQuestionIds = string.Join(",", checkedQuestions);
+
+            // Update the question_ids field of SelectedExam
+            SelectedExam.questions = checkedQuestionIds;
+
+            // Update the question_ids in the database
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                connection.Open();
+
+                string updateQuery = "UPDATE exams SET question_ids = @questionIds WHERE id = @examId";
+                using (SqlCommand updateCommand = new SqlCommand(updateQuery, connection))
+                {
+                    updateCommand.Parameters.AddWithValue("@questionIds", checkedQuestionIds);
+                    updateCommand.Parameters.AddWithValue("@examId", SelectedExam.id);
+
+                    int rowsAffected = updateCommand.ExecuteNonQuery();
+                }
+
+                // Delete unchecked students' exam results
+                string deleteQuery = "DELETE FROM exam_results WHERE exam_id = @examId AND student_id = @student_id";
+                using (SqlCommand deleteCommand = new SqlCommand(deleteQuery, connection))
+                {
+                    foreach (var item in studentsCheckedListBox.Items)
+                    {
+                        string studentInfo = item.ToString();
+                        int studentId = int.Parse(studentInfo.Split(':')[0]);
+
+                        // Check if the student is checked
+                        bool isChecked = studentsCheckedListBox.CheckedItems.Contains(item);
+                        if (!isChecked)
+                        {
+                            deleteCommand.Parameters.Clear();
+                            deleteCommand.Parameters.AddWithValue("@examId", SelectedExam.id);
+                            deleteCommand.Parameters.AddWithValue("@student_id", studentId);
+                            RemoveEligibleStudent(studentId);
+                            deleteCommand.ExecuteNonQuery();
+                        }
+                    }
+                }
+
+                // Insert checked students' exam results
+                string insertQuery = "INSERT INTO exam_results (exam_id, student_id) VALUES (@examId, @student_id)";
+                using (SqlCommand insertCommand = new SqlCommand(insertQuery, connection))
+                {
+                    foreach (var item in studentsCheckedListBox.CheckedItems)
+                    {
+                        string studentInfo = item.ToString();
+                        int studentId = int.Parse(studentInfo.Split(':')[0]);
+
+                        // Check if the student is already present
+                        bool isPresent = SelectedExam.eligible_students.Contains(studentId.ToString());
+                        if (!isPresent)
+                        {
+                            insertCommand.Parameters.Clear();
+                            insertCommand.Parameters.AddWithValue("@examId", SelectedExam.id);
+                            insertCommand.Parameters.AddWithValue("@student_id", studentId);
+                            AddEligibleStudent(studentId);
+                            insertCommand.ExecuteNonQuery();
+                        }
+                    }
+                }
+
+                string updateEligibleStudentsQuery = "UPDATE exams SET eligible_student_ids = @eligible_students WHERE id = @examId";
+                using (SqlCommand updateEligibleStudentsCommand = new SqlCommand(updateEligibleStudentsQuery, connection))
+                {
+                    updateEligibleStudentsCommand.Parameters.AddWithValue("@eligible_students", SelectedExam.eligible_students);
+                    updateEligibleStudentsCommand.Parameters.AddWithValue("@examId", SelectedExam.id);
+                    updateEligibleStudentsCommand.ExecuteNonQuery();
+                }
+            }
+        }
+
+        private void AddEligibleStudent(int id)
+        {
+            int[] eligibleStudents = SelectedExam.eligible_students.Split(',').Select(int.Parse).ToArray();
+            List<int> eligibleStudentsList = eligibleStudents.ToList();
+            eligibleStudentsList.Add(id);
+            SelectedExam.eligible_students = string.Join(",", eligibleStudentsList);
+        }
+        private void RemoveEligibleStudent(int id)
+        {
+            int index = SelectedExam.eligible_students.IndexOf(id.ToString());
+            int[] eligibleStudents= SelectedExam.eligible_students.Split(',').Select(int.Parse).ToArray();
+            List<int> eligibleStudentsList = eligibleStudents.ToList();
+            eligibleStudentsList.RemoveAt(index);
+            SelectedExam.eligible_students = string.Join(",", eligibleStudentsList);
+        }
+
     }
 }

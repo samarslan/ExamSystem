@@ -98,6 +98,7 @@
             applChgnsBtn.TabIndex = 7;
             applChgnsBtn.Text = "Kaydet";
             applChgnsBtn.UseVisualStyleBackColor = true;
+            applChgnsBtn.Click += applChgnsBtn_Click;
             // 
             // crtQstnBtn
             // 

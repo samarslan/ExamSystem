@@ -55,7 +55,7 @@
             createExamBtn.Name = "createExamBtn";
             createExamBtn.Size = new Size(144, 89);
             createExamBtn.TabIndex = 2;
-            createExamBtn.Text = "button1";
+            createExamBtn.Text = "Sınav Oluştur";
             createExamBtn.UseVisualStyleBackColor = true;
             // 
             // examInfoBtn
@@ -96,7 +96,7 @@
             editExamBtn.Name = "editExamBtn";
             editExamBtn.Size = new Size(144, 89);
             editExamBtn.TabIndex = 3;
-            editExamBtn.Text = "button1";
+            editExamBtn.Text = "Sınavı Düzenle";
             editExamBtn.UseVisualStyleBackColor = true;
             editExamBtn.Click += editExamBtn_Click;
             // 
