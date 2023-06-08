@@ -13,6 +13,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Çözüm Öğeleri", "Çöz
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TeacherApp", "TeacherApp\TeacherApp.csproj", "{969E6497-1E64-458C-94EC-C9EA8399CB4E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AdminApp", "AdminApp\AdminApp.csproj", "{5CC34387-02EC-43B7-B7E9-39F073BF7CB8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{969E6497-1E64-458C-94EC-C9EA8399CB4E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{969E6497-1E64-458C-94EC-C9EA8399CB4E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{969E6497-1E64-458C-94EC-C9EA8399CB4E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5CC34387-02EC-43B7-B7E9-39F073BF7CB8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5CC34387-02EC-43B7-B7E9-39F073BF7CB8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5CC34387-02EC-43B7-B7E9-39F073BF7CB8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5CC34387-02EC-43B7-B7E9-39F073BF7CB8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
