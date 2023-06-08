@@ -186,24 +186,6 @@ namespace AdminApp
                         {
                             connection.Open();
 
-                            string userDeleteQuery = "DELETE FROM users WHERE id = @userId";
-
-                            using (SqlCommand deleteCommand = new SqlCommand(userDeleteQuery, connection))
-                            {
-                                deleteCommand.Parameters.AddWithValue("@userId", userId);
-
-                                int rowsAffected = deleteCommand.ExecuteNonQuery();
-                                if (rowsAffected > 0)
-                                {
-                                    MessageBox.Show("User deleted successfully.");
-                                    PopulateUsers();
-                                }
-                                else
-                                {
-                                    MessageBox.Show("Failed to delete user.");
-                                }
-                            }
-
                             List<int> examIds = new List<int>();
                             string examIdQuery = "SELECT id FROM exams WHERE teacher_id = @userId";
 
@@ -220,6 +202,28 @@ namespace AdminApp
                                 reader.Close();
                             }
 
+                            string examResultDeleteQuery = "DELETE FROM exam_results WHERE exam_id = @examId";
+
+                            foreach (int examId in examIds)
+                            {
+                                using (SqlCommand command = new SqlCommand(examResultDeleteQuery, connection))
+                                {
+                                    command.Parameters.AddWithValue("@examId", examId);
+
+                                    int rowsAffected = command.ExecuteNonQuery();
+                                    if (rowsAffected > 0)
+                                    {
+                                        MessageBox.Show("Öğretmenin sınav sonuçları başarıyla silindi.");
+                                        PopulateUsers();
+                                    }
+                                    else
+                                    {
+                                        MessageBox.Show("Sınav sonuçları silinemedi.");
+                                    }
+                                }
+                            }
+
+
                             string examDeleteQuery = "DELETE FROM exams WHERE teacher_id = @userId";
 
                             using (SqlCommand command = new SqlCommand(examDeleteQuery, connection))
@@ -229,40 +233,37 @@ namespace AdminApp
                                 int rowsAffected = command.ExecuteNonQuery();
                                 if (rowsAffected > 0)
                                 {
-                                    MessageBox.Show("User deleted successfully.");
+                                    MessageBox.Show("Öğretmenin sınavları başarıyla silindi.");
                                     PopulateUsers();
                                 }
                                 else
                                 {
-                                    MessageBox.Show("Failed to delete user.");
+                                    MessageBox.Show("Sınavlar silinemedi.");
                                 }
                             }
 
-                            string examResultDeleteQuery = "DELETE FROM exam_results WHERE exam_id = @examId";
+                            string userDeleteQuery = "DELETE FROM users WHERE id = @userId";
 
-                            using (SqlCommand command = new SqlCommand(examResultDeleteQuery, connection))
+                            using (SqlCommand deleteCommand = new SqlCommand(userDeleteQuery, connection))
                             {
-                                foreach (int examId in examIds)
-                                {
-                                    command.Parameters.AddWithValue("@examId", examId);
+                                deleteCommand.Parameters.AddWithValue("@userId", userId);
 
-                                    int rowsAffected = command.ExecuteNonQuery();
-                                    if (rowsAffected > 0)
-                                    {
-                                        MessageBox.Show("User deleted successfully.");
-                                        PopulateUsers();
-                                    }
-                                    else
-                                    {
-                                        MessageBox.Show("Failed to delete user.");
-                                    }
+                                int rowsAffected = deleteCommand.ExecuteNonQuery();
+                                if (rowsAffected > 0)
+                                {
+                                    MessageBox.Show("Kullanıcı başarıyla silindi.");
+                                    PopulateUsers();
+                                }
+                                else
+                                {
+                                    MessageBox.Show("Kullanıcı silinemedi.");
                                 }
                             }
                         }
                     }
                     catch (Exception ex)
                     {
-                        MessageBox.Show("An error occurred while accessing the database: " + ex.Message);
+                        MessageBox.Show("Veritabanına bağlanırken bir hata oluştu: " + ex.Message);
                     }
                 }
                 else if (selectedUserType == 0)

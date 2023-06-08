@@ -50,7 +50,7 @@
             userInfoBtn.Name = "userInfoBtn";
             userInfoBtn.Size = new Size(129, 65);
             userInfoBtn.TabIndex = 1;
-            userInfoBtn.Text = "button1";
+            userInfoBtn.Text = "Kullanıcı Bilgisi";
             userInfoBtn.UseVisualStyleBackColor = true;
             userInfoBtn.Click += userInfoBtn_Click;
             // 
@@ -60,7 +60,7 @@
             userEditBtn.Name = "userEditBtn";
             userEditBtn.Size = new Size(129, 65);
             userEditBtn.TabIndex = 2;
-            userEditBtn.Text = "button2";
+            userEditBtn.Text = "Kullanıcıyı Düzenle";
             userEditBtn.UseVisualStyleBackColor = true;
             // 
             // userCreateBtn
@@ -69,7 +69,7 @@
             userCreateBtn.Name = "userCreateBtn";
             userCreateBtn.Size = new Size(129, 65);
             userCreateBtn.TabIndex = 3;
-            userCreateBtn.Text = "button3";
+            userCreateBtn.Text = "Kullanıcı Oluştur";
             userCreateBtn.UseVisualStyleBackColor = true;
             userCreateBtn.Click += userCreateBtn_Click;
             // 
@@ -79,7 +79,7 @@
             userDeleteBtn.Name = "userDeleteBtn";
             userDeleteBtn.Size = new Size(129, 65);
             userDeleteBtn.TabIndex = 4;
-            userDeleteBtn.Text = "button4";
+            userDeleteBtn.Text = "Kullanıcıyı Sil";
             userDeleteBtn.UseVisualStyleBackColor = true;
             userDeleteBtn.Click += userDeleteBtn_Click;
             // 
