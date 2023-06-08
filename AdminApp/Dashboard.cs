@@ -277,7 +277,7 @@ namespace AdminApp
 
                             string examIdsQuerry = "SELECT DISTINCT exam_id FROM exam_results WHERE student_id = @userId";
 
-                            using(SqlCommand command=new SqlCommand(examIdsQuerry, connection))
+                            using (SqlCommand command = new SqlCommand(examIdsQuerry, connection))
                             {
                                 command.Parameters.AddWithValue("@userId", userId);
 
@@ -293,23 +293,6 @@ namespace AdminApp
                                 reader.Close();
                             }
 
-                            //string deleteEligibleStudentQuery = "UPDATE exams SET eligible_student_ids = REPLACE(eligible_student_ids, ',' + @userId + ',', ',') WHERE ',' + eligible_student_ids + ',' LIKE '%,' + @userId + ',%'";
-
-                            //using (SqlCommand deleteCommand = new SqlCommand(deleteEligibleStudentQuery, connection))
-                            //{
-                            //    deleteCommand.Parameters.AddWithValue("@userId", userId.ToString());
-
-                            //    int rowsAffected = deleteCommand.ExecuteNonQuery();
-
-                            //    if (rowsAffected > 0)
-                            //    {
-                            //        MessageBox.Show("Student ID deleted from eligible_student_ids successfully.");
-                            //    }
-                            //    else
-                            //    {
-                            //        MessageBox.Show("Failed to delete student ID from eligible_student_ids.");
-                            //    }
-                            //}
 
                             foreach (int examId in examIds)
                             {
@@ -361,13 +344,13 @@ namespace AdminApp
                                             MessageBox.Show("Failed to delete student ID from eligible_student_ids.");
                                         }
                                     }
-                                }   
+                                }
                             }
 
 
                             string deleteExamResultsQuery = "DELETE FROM exam_results WHERE student_id = @userId";
 
-                            using(SqlCommand command=new SqlCommand(deleteExamResultsQuery,connection))
+                            using (SqlCommand command = new SqlCommand(deleteExamResultsQuery, connection))
                             {
                                 command.Parameters.AddWithValue("@userId", userId);
 
