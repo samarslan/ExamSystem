@@ -273,23 +273,6 @@ namespace AdminApp
                         {
                             connection.Open();
 
-                            string deleteQuery = "DELETE FROM users WHERE id = @userId";
-                            using (SqlCommand deleteCommand = new SqlCommand(deleteQuery, connection))
-                            {
-                                deleteCommand.Parameters.AddWithValue("@userId", userId);
-
-                                int rowsAffected = deleteCommand.ExecuteNonQuery();
-                                if (rowsAffected > 0)
-                                {
-                                    MessageBox.Show("User deleted successfully.");
-                                    PopulateUsers();
-                                }
-                                else
-                                {
-                                    MessageBox.Show("Failed to delete user.");
-                                }
-                            }
-
                             List<int> examIds = new List<int>();
 
                             string examIdsQuerry = "SELECT DISTINCT exam_id FROM exam_results WHERE student_id = @userId";
@@ -310,23 +293,77 @@ namespace AdminApp
                                 reader.Close();
                             }
 
-                            string deleteEligibleStudentQuery = "UPDATE exams SET eligible_student_ids = REPLACE(eligible_student_ids, ',' + @userId + ',', ',') WHERE ',' + eligible_student_ids + ',' LIKE '%,' + @userId + ',%'";
+                            //string deleteEligibleStudentQuery = "UPDATE exams SET eligible_student_ids = REPLACE(eligible_student_ids, ',' + @userId + ',', ',') WHERE ',' + eligible_student_ids + ',' LIKE '%,' + @userId + ',%'";
 
-                            using (SqlCommand deleteCommand = new SqlCommand(deleteQuery, connection))
+                            //using (SqlCommand deleteCommand = new SqlCommand(deleteEligibleStudentQuery, connection))
+                            //{
+                            //    deleteCommand.Parameters.AddWithValue("@userId", userId.ToString());
+
+                            //    int rowsAffected = deleteCommand.ExecuteNonQuery();
+
+                            //    if (rowsAffected > 0)
+                            //    {
+                            //        MessageBox.Show("Student ID deleted from eligible_student_ids successfully.");
+                            //    }
+                            //    else
+                            //    {
+                            //        MessageBox.Show("Failed to delete student ID from eligible_student_ids.");
+                            //    }
+                            //}
+
+                            foreach (int examId in examIds)
                             {
-                                deleteCommand.Parameters.AddWithValue("@userId", userId);
+                                string getEligibleStudentsIds = "SELECT eligible_student_ids from exams Where id=@examid";
 
-                                int rowsAffected = deleteCommand.ExecuteNonQuery();
+                                using (SqlCommand command = new SqlCommand(getEligibleStudentsIds, connection))
+                                {
+                                    command.Parameters.AddWithValue("@examid", examId);
 
-                                if (rowsAffected > 0)
-                                {
-                                    MessageBox.Show("Student ID deleted from eligible_student_ids successfully.");
-                                }
-                                else
-                                {
-                                    MessageBox.Show("Failed to delete student ID from eligible_student_ids.");
-                                }
+                                    SqlDataReader reader = command.ExecuteReader();
+
+                                    string eligibleStudentIds = "";
+                                    if (reader.Read())
+                                    {
+                                        eligibleStudentIds = (string)reader["eligible_student_ids"];
+                                    }
+
+                                    reader.Close();
+
+                                    string[] eligibleStudentIdsArray = eligibleStudentIds.Split(',');
+
+                                    string newEligibleStudentIds = "";
+
+                                    foreach (string eligibleStudentId in eligibleStudentIdsArray)
+                                    {
+                                        if (eligibleStudentId != userId.ToString())
+                                        {
+                                            newEligibleStudentIds += eligibleStudentId + ",";
+                                        }
+                                    }
+
+                                    newEligibleStudentIds = newEligibleStudentIds.TrimEnd(',');
+
+                                    string updateEligibleStudentIdsQuery = "UPDATE exams SET eligible_student_ids = @eligibleStudentIds WHERE id = @examId";
+
+                                    using (SqlCommand updateCommand = new SqlCommand(updateEligibleStudentIdsQuery, connection))
+                                    {
+                                        updateCommand.Parameters.AddWithValue("@eligibleStudentIds", newEligibleStudentIds);
+                                        updateCommand.Parameters.AddWithValue("@examId", examId);
+
+                                        int rowsAffected = updateCommand.ExecuteNonQuery();
+
+                                        if (rowsAffected > 0)
+                                        {
+                                            MessageBox.Show("Student ID deleted from eligible_student_ids successfully.");
+                                        }
+                                        else
+                                        {
+                                            MessageBox.Show("Failed to delete student ID from eligible_student_ids.");
+                                        }
+                                    }
+                                }   
                             }
+
 
                             string deleteExamResultsQuery = "DELETE FROM exam_results WHERE student_id = @userId";
 
@@ -344,6 +381,25 @@ namespace AdminApp
                                     MessageBox.Show("Öğrencinin Sınavları Silinemedi.");
                                 }
                             }
+
+
+                            string deleteQuery = "DELETE FROM users WHERE id = @userId";
+                            using (SqlCommand deleteCommand = new SqlCommand(deleteQuery, connection))
+                            {
+                                deleteCommand.Parameters.AddWithValue("@userId", userId);
+
+                                int rowsAffected = deleteCommand.ExecuteNonQuery();
+                                if (rowsAffected > 0)
+                                {
+                                    MessageBox.Show("User deleted successfully.");
+                                    PopulateUsers();
+                                }
+                                else
+                                {
+                                    MessageBox.Show("Failed to delete user.");
+                                }
+                            }
+
 
                         }
                     }
