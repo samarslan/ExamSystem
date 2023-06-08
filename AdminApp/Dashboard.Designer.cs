@@ -71,6 +71,7 @@
             userCreateBtn.TabIndex = 3;
             userCreateBtn.Text = "button3";
             userCreateBtn.UseVisualStyleBackColor = true;
+            userCreateBtn.Click += userCreateBtn_Click;
             // 
             // userDeleteBtn
             // 
@@ -80,6 +81,7 @@
             userDeleteBtn.TabIndex = 4;
             userDeleteBtn.Text = "button4";
             userDeleteBtn.UseVisualStyleBackColor = true;
+            userDeleteBtn.Click += userDeleteBtn_Click;
             // 
             // Dashboard
             // 
