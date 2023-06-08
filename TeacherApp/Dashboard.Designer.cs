@@ -57,6 +57,7 @@
             createExamBtn.TabIndex = 2;
             createExamBtn.Text = "Sınav Oluştur";
             createExamBtn.UseVisualStyleBackColor = true;
+            createExamBtn.Click += createExamBtn_Click;
             // 
             // examInfoBtn
             // 

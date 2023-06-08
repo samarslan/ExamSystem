@@ -195,11 +195,35 @@ namespace TeacherApp
         private void RemoveEligibleStudent(int id)
         {
             int index = SelectedExam.eligible_students.IndexOf(id.ToString());
-            int[] eligibleStudents= SelectedExam.eligible_students.Split(',').Select(int.Parse).ToArray();
+            int[] eligibleStudents = SelectedExam.eligible_students.Split(',').Select(int.Parse).ToArray();
             List<int> eligibleStudentsList = eligibleStudents.ToList();
             eligibleStudentsList.RemoveAt(index);
             SelectedExam.eligible_students = string.Join(",", eligibleStudentsList);
         }
 
+        private void questionsCheckedListBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void studentsCheckedListBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+        }
+
+        private void label2_Click(object sender, EventArgs e)
+        {
+        }
+
+        private void label3_Click(object sender, EventArgs e)
+        {
+        }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+        }
     }
 }

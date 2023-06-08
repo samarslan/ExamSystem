@@ -46,6 +46,7 @@
             textBox1.Name = "textBox1";
             textBox1.Size = new Size(124, 26);
             textBox1.TabIndex = 0;
+            textBox1.TextChanged += textBox1_TextChanged;
             // 
             // questionsCheckedListBox
             // 
@@ -54,6 +55,7 @@
             questionsCheckedListBox.Name = "questionsCheckedListBox";
             questionsCheckedListBox.Size = new Size(332, 403);
             questionsCheckedListBox.TabIndex = 2;
+            questionsCheckedListBox.SelectedIndexChanged += questionsCheckedListBox_SelectedIndexChanged;
             // 
             // studentsCheckedListBox
             // 
@@ -62,6 +64,7 @@
             studentsCheckedListBox.Name = "studentsCheckedListBox";
             studentsCheckedListBox.Size = new Size(245, 403);
             studentsCheckedListBox.TabIndex = 3;
+            studentsCheckedListBox.SelectedIndexChanged += studentsCheckedListBox_SelectedIndexChanged;
             // 
             // label1
             // 
@@ -71,6 +74,7 @@
             label1.Size = new Size(68, 19);
             label1.TabIndex = 4;
             label1.Text = "Sınav Adı:";
+            label1.Click += label1_Click;
             // 
             // label2
             // 
@@ -80,6 +84,7 @@
             label2.Size = new Size(52, 19);
             label2.TabIndex = 5;
             label2.Text = "Sorular";
+            label2.Click += label2_Click;
             // 
             // label3
             // 
@@ -89,6 +94,7 @@
             label3.Size = new Size(72, 19);
             label3.TabIndex = 6;
             label3.Text = "Öğrenciler";
+            label3.Click += label3_Click;
             // 
             // applChgnsBtn
             // 
