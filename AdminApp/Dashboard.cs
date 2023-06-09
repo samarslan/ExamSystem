@@ -399,5 +399,17 @@ namespace AdminApp
             }
         }
 
+        private void userEditBtn_Click(object sender, EventArgs e)
+        {
+            if (userListBox.SelectedIndex != -1)
+            {
+                SuccsesfullLogin.selectedUserId= int.Parse(userListBox.SelectedItem.ToString().Split(':')[0].Trim());
+
+                UserEdit userEdit = new UserEdit();
+                userEdit.ShowDialog();
+
+                PopulateUsers();
+            }
+        }
     }
 }

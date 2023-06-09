@@ -13,5 +13,6 @@ namespace AdminApp
         internal static string password;
         internal static string firstName;
         internal static string lastName;
+        internal static int selectedUserId;
     }
 }

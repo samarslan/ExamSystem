@@ -62,6 +62,7 @@
             userEditBtn.TabIndex = 2;
             userEditBtn.Text = "Kullanıcıyı Düzenle";
             userEditBtn.UseVisualStyleBackColor = true;
+            userEditBtn.Click += userEditBtn_Click;
             // 
             // userCreateBtn
             // 
