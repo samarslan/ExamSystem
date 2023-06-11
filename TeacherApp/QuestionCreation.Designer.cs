@@ -190,7 +190,7 @@
             qstnCrtnBtn.Name = "qstnCrtnBtn";
             qstnCrtnBtn.Size = new Size(545, 73);
             qstnCrtnBtn.TabIndex = 14;
-            qstnCrtnBtn.Text = "button1";
+            qstnCrtnBtn.Text = "Soruyu Kaydet";
             qstnCrtnBtn.UseVisualStyleBackColor = true;
             qstnCrtnBtn.Click += qstnCrtnBtn_Click;
             // 
