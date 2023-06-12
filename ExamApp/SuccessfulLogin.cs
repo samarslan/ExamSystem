@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace ExamApp
+﻿namespace ExamApp
 {
-    internal class SuccsesfullLogin
+    internal class SuccessfulLogin
     {
         internal static int id;
         internal static string username;

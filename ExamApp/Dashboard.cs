@@ -22,7 +22,7 @@ namespace ExamApp
 
         private void Dashboard_Load(object sender, EventArgs e)
         {
-            label1.Text = $"{SuccsesfullLogin.firstName} {SuccsesfullLogin.lastName}, Sınav Sistemine Hoşgeldin";
+            label1.Text = $"{SuccessfulLogin.firstName} {SuccessfulLogin.lastName}, Sınav Sistemine Hoşgeldin";
 
             PopulateExams();
         }
@@ -78,7 +78,7 @@ namespace ExamApp
                     using (SqlCommand command = new SqlCommand(query, connection))
                     {
                         command.Parameters.AddWithValue("@examId", examId);
-                        command.Parameters.AddWithValue("@userId", SuccsesfullLogin.id);
+                        command.Parameters.AddWithValue("@userId", SuccessfulLogin.id);
 
                         SqlDataReader reader = command.ExecuteReader();
                         if (reader.Read())
@@ -144,7 +144,7 @@ namespace ExamApp
                     using (SqlCommand command = new SqlCommand(query, connection))
                     {
                         command.Parameters.AddWithValue("@examId", examId);
-                        command.Parameters.AddWithValue("@userId", SuccsesfullLogin.id);
+                        command.Parameters.AddWithValue("@userId", SuccessfulLogin.id);
 
                         object result = command.ExecuteScalar();
 
@@ -152,7 +152,7 @@ namespace ExamApp
                         if (result == DBNull.Value)
                         {
                             // Set the selected exam ID in SuccsesfullLogin.cs
-                            SuccsesfullLogin.selectedExam = examId;
+                            SuccessfulLogin.selectedExam = examId;
 
                             // Hide this form
                             this.Hide();

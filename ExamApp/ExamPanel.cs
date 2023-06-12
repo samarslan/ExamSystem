@@ -13,7 +13,7 @@ namespace ExamApp
 {
     public partial class ExamPanel : Form
     {
-        int selectedExamId = SuccsesfullLogin.selectedExam;
+        int selectedExamId = SuccessfulLogin.selectedExam;
         string connectionString = "Data Source=localhost;Initial Catalog=ExamSystem;Integrated Security=True";
         string[] givenAnswers;
         int questionCounter = 0;
@@ -38,8 +38,8 @@ namespace ExamApp
                           )";
                 using (SqlCommand command = new SqlCommand(query, connection))
                 {
-                    command.Parameters.AddWithValue("@selectedExam", SuccsesfullLogin.selectedExam);
-                    command.Parameters.AddWithValue("@studentId", SuccsesfullLogin.id);
+                    command.Parameters.AddWithValue("@selectedExam", SuccessfulLogin.selectedExam);
+                    command.Parameters.AddWithValue("@studentId", SuccessfulLogin.id);
 
                     using (SqlDataReader reader = command.ExecuteReader())
                     {
@@ -177,7 +177,7 @@ namespace ExamApp
                 {
                     command.Parameters.AddWithValue("@score", score);
                     command.Parameters.AddWithValue("@examId", Exam.id);
-                    command.Parameters.AddWithValue("@studentId", SuccsesfullLogin.id);
+                    command.Parameters.AddWithValue("@studentId", SuccessfulLogin.id);
 
                     command.ExecuteNonQuery();
                 }

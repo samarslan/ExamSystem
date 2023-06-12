@@ -35,12 +35,11 @@ namespace ExamApp
                             {
                                 string firstName = reader["first_name"].ToString();
                                 string lastName = reader["last_name"].ToString();
-                                SuccsesfullLogin.id = Convert.ToInt32(reader["id"].ToString());
-                                SuccsesfullLogin.username = username;
-                                SuccsesfullLogin.password = password;
-                                SuccsesfullLogin.firstName = reader["first_name"].ToString();
-                                SuccsesfullLogin.lastName = reader["last_name"].ToString();
-                                //MessageBox.Show($"{firstName} {lastName}, baþarýyla giriþ yaptýnýz.");
+                                SuccessfulLogin.id = Convert.ToInt32(reader["id"].ToString());
+                                SuccessfulLogin.username = username;
+                                SuccessfulLogin.password = password;
+                                SuccessfulLogin.firstName = reader["first_name"].ToString();
+                                SuccessfulLogin.lastName = reader["last_name"].ToString();
                                 Dashboard dashboard = new Dashboard();
                                 dashboard.Show();
                                 this.Hide();
