@@ -57,10 +57,8 @@ namespace ExamApp
 
         private void button2_Click(object sender, EventArgs e)
         {
-            // ListBox'ta seçili bir sınavın olup olmadığını kontrol edin
             if (listBox1.SelectedItem != null)
             {
-                // ListBox'tan seçili sınavın ID'sini ve adını alın
                 string selectedExam = listBox1.SelectedItem.ToString();
                 int examId = Convert.ToInt32(selectedExam.Split(':')[0]);
 
@@ -68,7 +66,6 @@ namespace ExamApp
                 {
                     connection.Open();
 
-                    // Giriş yapmış kullanıcı için sınav ayrıntılarını ve öğretmen adını almak için sorgu
                     string query = @"SELECT exams.id, exams.teacher_id, exams.exam_name, exam_results.score, users.first_name, users.last_name
                              FROM exams
                              LEFT JOIN exam_results ON exams.id = exam_results.exam_id
@@ -103,7 +100,7 @@ namespace ExamApp
                             }
                             else
                             {
-                                message = $"Sınav ID: {examIdResult}\nSınav Adı: {examName}\nÖğretmen: {teacherFirstName} {teacherLastName}\nPuan: Bu sınavı çözmüş değilsiniz.";
+                                message = $"Sınav ID: {examIdResult}\nSınav Adı: {examName}\nÖğretmen: {teacherFirstName} {teacherLastName}\nPuan: Bu sınavı henüz çözmediniz.";
                             }
 
                             MessageBox.Show(message);
@@ -125,10 +122,8 @@ namespace ExamApp
 
         private void button1_Click(object sender, EventArgs e)
         {
-            // Check if an exam is selected in the ListBox
             if (listBox1.SelectedItem != null)
             {
-                // Get the selected exam ID and name from the ListBox
                 string selectedExam = listBox1.SelectedItem.ToString();
                 int examId = Convert.ToInt32(selectedExam.Split(':')[0]);
 
@@ -136,7 +131,6 @@ namespace ExamApp
                 {
                     connection.Open();
 
-                    // Query to check if the student's exam result is null for the selected exam
                     string query = @"SELECT score
                              FROM exam_results
                              WHERE exam_id = @examId AND student_id = @userId";
@@ -148,16 +142,12 @@ namespace ExamApp
 
                         object result = command.ExecuteScalar();
 
-                        // Check if the student's exam result is null
                         if (result == DBNull.Value)
                         {
-                            // Set the selected exam ID in SuccsesfullLogin.cs
                             SuccessfulLogin.selectedExam = examId;
 
-                            // Hide this form
                             this.Hide();
 
-                            // Open the ExamPanel form
                             ExamPanel examPanelForm = new ExamPanel();
                             examPanelForm.Show();
                         }
